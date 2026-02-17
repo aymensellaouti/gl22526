@@ -29,26 +29,58 @@
 // const avgNonFaultyTemperatureSensors = nonFaultyTemperatureSensors.length ? nonFaultyTemperatureSensors.reduce((acc, element) => acc + element.value, 0)/nonFaultyTemperatureSensors.length : 0;
 
 // console.log(avgNonFaultyTemperatureSensors);
-// select ampoule 
+// select ampoule
+
+const lis = document.querySelectorAll('li');
+const ol = document.querySelector('ol');
+console.log(lis);
+ol.addEventListener('click', (e) => {
+    console.log({target : e.target});
+    
+    let li = e.target;
+    li.style.color = li.style.color == 'red' ? 'yellow' : 'red'
+})
+// Non optimal version
+// lis.forEach((li) => {
+//     li.addEventListener('click', (e) => {
+//         li.style.color = li.style.color == 'red' ? 'yellow' : 'red'
+//     })
+// })
+
+
 const ampoule = document.querySelector('div');
-setInterval(
-    () => {
+const interrupteur = () => {
         ampoule.classList.toggle('close');
         ampoule.classList.toggle('open');
-    }, 1500
-);
+    }
+ampoule.addEventListener('click', (e) => {
+        console.log(e);
+        ampoule.classList.toggle('close');
+        ampoule.classList.toggle('open');
+    })
+// setInterval(
+//  interrupteur, 1500
+// );
 const regions = ['Djerba', 'Tunis', 'Sousse', 'Sfax', 'Kasserine', 'Beja'];
-const ol = document.querySelector('.regions');
+const regionsOl = document.querySelector('.regions');
 let i = 0;
-setInterval(
-    () => {
-        if(!(i % regions.length)) {
-            // remet à jour la liste
-            ol.innerHTML = '';
-        }
-        // nzid une région fel liste 
-        const region = `<li>${regions[i % regions.length]}</li>`;
-        i++;
-        ol.innerHTML+= region;
-    }, 1000
-)
+// setInterval(
+//     () => {
+//         if(!(i % regions.length)) {
+//             // remet à jour la liste
+//             ol.innerHTML = '';
+//         }
+//         // nzid une région fel liste 
+//         const region = `<li>${regions[i % regions.length]}</li>`;
+//         i++;
+//         ol.innerHTML+= region;
+//     }, 1000
+// )
+
+const body = document.querySelector('body');
+
+body.addEventListener('dblclick', (e) => {
+    const tagret = e.target;
+    const targetParent = tagret.parentNode;
+    targetParent.removeChild(tagret);
+})
